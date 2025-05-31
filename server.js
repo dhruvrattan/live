@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const WebSocket = require('ws');
 const { GoogleGenAI, Modality } = require('@google/genai');
+const systemInstruction = require('./system_instructions.js');
 // const { WaveFile } = require('wavefile'); // For potential server-side audio processing/debugging
 
 const PORT = process.env.PORT || 3000;
@@ -19,6 +20,7 @@ const ai = new GoogleGenAI({ apiKey: GOOGLE_API_KEY });
 const modelName = 'gemini-2.5-flash-preview-native-audio-dialog'; // As per requirements
 const liveConfig = {
     responseModalities: [Modality.AUDIO],
+    systemInstruction: systemInstruction,
     // Consider adding other configs like systemInstruction, affectiveDialog, etc. later if needed
     // systemInstruction: "You are a helpful voice assistant.",
     // enableAffectiveDialog: true, // Requires v1alpha API version
